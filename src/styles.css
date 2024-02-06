@@ -1,0 +1,245 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	background-color: #F0F5FA;
+	/*font-weight: bold;*/
+}
+
+button {
+	margin-top: 10px;
+	align-self: baseline;
+}
+
+/* Shared table style */
+.table-style {
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+	max-width: 900px;
+	width: 100%;
+}
+
+/* Navigation.js */
+
+.navigation {
+	background-color: #0053A0;
+	width: 100%;
+	height: 151px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navigation-logo {
+	width: 50%;
+	height: auto;
+	display: flex;
+	vertical-align: middle;
+	margin-left: 75px;
+}
+
+.navigation-links {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.navigation-links ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+}
+
+.navigation-links ul li {
+	margin-right: 40px;
+	width: auto;
+}
+
+.navigation-links ul li a {
+	color: white;
+	font-size: 1rem;
+	text-decoration: none;
+}
+
+.navigation-links ul li a:hover {
+	text-decoration: underline;
+}
+
+.navigation-links ul li:last-child {
+	margin-right: 70px;
+}
+
+.navigation-links ul li.selected a {
+	color: #4B4F58;
+}
+
+/* FormPage.js */
+.form-page-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background-image: url("./pictures/avdalyan-4MxD-wt9cas-unsplash.jpg");
+	background-size: cover;
+	background-position: center;
+	margin: 0;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 600px;
+	z-index: 1;
+	background-color: #F0F5FA;
+	padding: 20px;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+.form-title {
+	color: rgb(0, 66, 128);
+	font-size: 1.5rem;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.form-page {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	max-width: 600px;
+	z-index: 1;
+}
+
+.postal-data-div {
+	margin-bottom: 10px;
+	text-align: center;
+	margin-right: 20px;
+	align-self: baseline;
+}
+
+.postal-data-input {
+	padding:10px;
+	margin-top: 5px;
+	box-sizing: border-box;
+	margin-right: 10px;
+	align-self: auto;
+}
+
+.postal-data-input:last-child {
+	margin-right: 0;
+}
+
+/* ResultsPage.js */
+.results-page-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 65vh;
+	margin: 0;
+	background-color: #F0F5FA;
+	padding: 20px;
+	margin-left: 100px;
+	margin-top: 75px;
+}
+
+.results-page-tables {
+	margin-top: 20vh;
+}
+
+.breadcrumb {
+	margin-bottom: 20px;
+}
+
+.results-table {
+	margin-top: 10px;
+}
+
+.results-table table thead th,
+.table-container th {
+	text-align: left;
+}
+
+.table-container thead th:last-child {
+	margin-bottom: 10px;
+}
+
+.results-page-container .table-style {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table-container {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table-container td,div {
+	margin-bottom: 10px;
+}
+
+/* Questions.js */
+
+.questions-container {
+	margin-left: 100px;
+	margin-top: 20px;
+}
+
+.breadcrumb {
+	margin-bottom: 20px;
+}
+
+.questions-form {
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	max-width: 900px;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.form-question {
+	margin-bottom: 15px;
+	max-width: 880px;
+}
+
+/* Answer label style */
+.form-answer-label {
+	display: block;
+	margin-bottom: 8px;
+}
+
+/* Expandable text field style */
+.expandable-text-field {
+	margin-top: 10px;
+	width: 100%;
+	height: 80px;
+	resize: vertical;
+}
+
+/* Input field style */
+.input-field {
+	margin-top: 10px;
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+/* Checkbox label style */
+.checkbox-label {
+	display: block;
+	margin-top: 10px;
+}
+
+/* Button style */
+.questions-submit-button {
+	margin-top: 20px;
+	align-self: baseline;
+}
