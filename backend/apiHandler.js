@@ -2,7 +2,7 @@ const axios = require('axios');
 const xml2js = require('xml2js');
 
 function getInsuranceData(postcode, huisnummer) {
-	const url = `https://thoma.kiesklaar.nl/webtool.service/premies.asmx/pcPremies?postcode=${postcode}&huisnummer=${huisnummer}`;
+	const url = `https://some-api?postcode=${postcode}&huisnummer=${huisnummer}`;
 
 	return axios.get(url)
 		.then((response) => {
