@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Insurance Quote Application - Proof of Concept
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This repository contains a Proof of Concept (POC) for an Insurance Quote Application. The application is designed to collect user input regarding insurance preferences, process the data, and provide a quote based on the selected options.
 
-In the project directory, you can run:
+## Disclaimer
 
-### `npm start`
+This application is a Proof of Concept (POC) and is not intended for production use.
+It is designed to demonstrate the functionality of an Insurance Quote Application and is not a complete solution.
+However, the application can be further developed and expanded to meet the requirements of a production environment.
+Currently, the application is only available in Dutch and is designed for Dutch postal codes.
+Https is implemented in the application, but it is not fully functional due to the lack of a valid SSL certificate.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- The API used in this project has access restrictions and is subject to specific terms of service set by the API provider.
+- Users of this project should obtain their own API access from the provider and adhere to the associated terms and conditions.
+- The project maintainer is not responsible for any misuse or violation of the API provider's terms.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- **Dynamic Questionnaire:** Users are presented with a dynamic questionnaire that adapts based on their responses.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Insurance Selection:** Users can choose from various insurance products, including AVP, Buiten, Inboedel, Ongevallen, Reis, Rechtsbijstand, and Woonhuis.
 
-### `npm run build`
+- **Data Storage:** The application saves user responses and selected insurance products in a backend database.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Notification:** Upon successful data submission, users are notified with a pop-up message indicating that the data has been saved.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technologies Used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Frontend:** React.js
+- **Backend:** Node.js, Express.js
+- **Database:** MariaDB
 
-### `npm run eject`
+## Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Clone the repository to your local machine.
+2. Navigate to the `main` directory and run `npm install` to install the required dependencies.
+3. Navigate to the `backend` directory and run `npm install` to install the required dependencies.
+4. Create a `.env` file in the `backend` directory and add the following environment variables:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=password
+DB_NAME=insurance
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Replace `localhost`, `root`, `password`, and `insurance` with your MariaDB host, username, password, and database name, respectively.
+Make sure to create the `insurance` database in MariaDB before running the application.
+In addition, replace the https://my-domain.com with your domain in the server.js file in the backend directory
+as well as in the axiosConfig.js file in the frontend directory.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. Run `npm start` in the `main` directory to start the frontend application.
+6. Run `npm start` in the `backend` directory to start the backend server.
+7. Navigate to `http://localhost:3000` in your web browser to access the application.
 
-## Learn More
+## Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Input an existing postal code (need to be a Dutch postal code) and click "Submit" to proceed.
+2. Select the insurance products you are interested in and click "Next" to proceed.
+3. Answer the questions presented to you and click "Next" to proceed. The questionnaire will adapt based on your responses.
+4. Review your selected responses and click "Submit" to save your data.
+5. A pop-up message will appear to notify you that your data has been saved.
+6. To view the saved data, access the `insurance` database in MariaDB.

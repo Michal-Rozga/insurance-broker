@@ -167,8 +167,8 @@ function Questions() {
 			// Send the data to the server
 			await axios.post('/api/save-questions', formData);
 
-			// Send data to the pipedrive webhook
-			await axios.post('https://hook.eu2.make.com/fwn79vha42oc7p134hikvcu3iqfo5dqt', formData);
+			// Send data to the a webhook
+			await axios.post('https://address-of-the-webhook.com/something', formData);
 
 			// Show success toast
 			toast.success('Data is succesvol opgeslagen! U kunt het venster sluiten.', {
