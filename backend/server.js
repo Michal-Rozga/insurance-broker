@@ -37,68 +37,72 @@ app.get('/api/insurance', (req, res) => {
 		});
 });
 
-function assign(columnName, values, value) {
-	if (value && value !== '') {
-		values[columnName] = value;
-	}
+function assignValue(target, englishName, formData, dutchPath) {
+    const value = dutchPath.split('.').reduce((acc, part) => acc && acc[part], formData);
+    if (value && value !== "") {
+        target[englishName] = value;
+    }
 }
 
-app.post('/api/save-questions', (req, res) => {
-	const formData = req.body;
+app.post("/api/save-questions", (req, res) => {
+    const formData = req.body;
     const values = {};
 
-	assign('postcode', values, formData['postcode']);
-	assign('huisnummer', values, formData['huisnummer']);
-	assign('premium_avp', values, formData['selectedItems']['PremiumAvp']);
-	assign('premium_buiten', values, formData['selectedItems']['PremiumBuiten']);
-	assign('premium_inboedel', values, formData['selectedItems']['PremiumInboedel']);
-	assign('premium_ongevallen', values, formData['selectedItems']['PremiumOngevallen']);
-	assign('premium_rechtsbijstand', values, formData['selectedItems']['PremiumRechtsbijstand']);
-	assign('premium_reis', values, formData['selectedItems']['PremiumReis']);
-	assign('premium_woonhuis', values, formData['selectedItems']['PremiumWoonhuis']);
-	assign('soort_verzekering', values, formData['answers'][0]['formFields']['soortVerzekering'])
-	assign('maatschappij_een', values, formData['answers'][0]['formFields']['maatschappij_een']);
-	assign('polisnummer', values, formData['answers'][0]['formFields']['polisnummer_een']);
-	assign('soort_dekking', values, formData['answers'][0]['formFields']['soortDekking']);
-	assign('verzekerd_bedrag', values, formData['answers'][0]['formFields']['verzekerdBedrag']);
-	assign('datum', values, formData['answers'][0]['formFields']['einddatum']);
-	assign('eventueleOpzegging', values, formData['answers'][0]['formFields']['eventueleOpzegging']);
-	assign('uzelf', values, formData['answers'][0]['formFields']['uzelf']);
-	assign('intermediair', values, formData['answers'][0]['formFields']['intermediair']);
-	assign('aantal_schades', values, formData['answers'][1]['formFields']['aantalSchades']);
-	assign('laatste_schadeclaim', values, formData['answers'][1]['formFields']['laatsteSchadeDatum']);
-	assign('totaal_bedrag', values, formData['answers'][1]['formFields']['totaalSchadeBedrag']);
-	assign('beschrijving', values, formData['answers'][2]['formFields']['expandableTextField']);
-	assign('maatschappij_vier', values, formData['answers'][3]['formFields']['maatschappij']);
-	assign('polisnummer_vier', values, formData['answers'][3]['formFields']['polisnummer']);
-	assign('toelichting', values, formData['answers'][3]['formFields']['toelichting']);
+    // Mapping Dutch paths to English column names
+    const mapping = {
+        "postcode": "postcode",
+        "huisnummer": "house_number",
+        "selectedItems.PremiumAvp": "premium_avp",
+        "selectedItems.PremiumBuiten": "premium_outside",
+        "selectedItems.PremiumInboedel": "premium_contents",
+        "selectedItems.PremiumOngevallen": "premium_accidents",
+        "selectedItems.PremiumRechtsbijstand": "premium_legal",
+        "selectedItems.PremiumReis": "premium_travel",
+        "selectedItems.PremiumWoonhuis": "premium_home",
+        "answers.0.formFields.soortVerzekering": "type_insurance",
+        "answers.0.formFields.maatschappij_een": "company_one",
+        "answers.0.formFields.polisnummer_een": "policy_number_one",
+        "answers.0.formFields.soortDekking": "type_coverage",
+        "answers.0.formFields.verzekerdBedrag": "insured_amount",
+        "answers.0.formFields.einddatum": "end_date",
+        "answers.0.formFields.eventueleOpzegging": "possible_cancellation",
+        "answers.0.formFields.uzelf": "yourself",
+        "answers.0.formFields.intermediair": "intermediary",
+        "answers.1.formFields.aantalSchades": "number_claims",
+        "answers.1.formFields.laatsteSchadeDatum": "last_claim_date",
+        "answers.1.formFields.totaalSchadeBedrag": "total_claim_amount",
+        "answers.2.formFields.expandableTextField": "description",
+        "answers.3.formFields.maatschappij": "company_four",
+        "answers.3.formFields.polisnummer": "policy_number_four",
+        "answers.3.formFields.toelichting": "explanation",
+    };
 
+    // Extract values using the mapping
+    Object.entries(mapping).forEach(([dutchPath, englishName]) => {
+        assignValue(values, englishName, formData, dutchPath);
+    });
 
+    const insertColumns = Object.keys(values).join(", ");
+    const insertValues = Object.values(values);
+    const insertPlaceholders = insertValues.map(() => "?").join(", ");
 
-
-	const insertColumns = Object.keys(values).join(', ');
-	const insertValues = Object.values(values);
-	const insertPlaceholders = Array.from({length : insertValues.length},() => '?').join(', ' );
-
-	const sql = `
+    const sql = `
     INSERT INTO general_information (
       ${insertColumns}
     ) VALUES (
       ${insertPlaceholders}
-    )
-  `;
+    )`;
 
-	// Execute the SQL query with your database connection
-	db.query(sql, insertValues, (error, results) => {
-		if (error) {
-			// Log the error to the file
-			console.error(`${new Date().toISOString()} - Error while saving data:`, error);
-			res.status(500).json({ error: 'Error while saving data' });
-		} else {
-			console.log('Data saved successfully');
-			res.json({ success: true });
-		}
-	});
+    // Execute the SQL query with your database connection
+    db.query(sql, insertValues, (error, results) => {
+        if (error) {
+            console.error(`${new Date().toISOString()} - Error while saving data:`, error);
+            res.status(500).json({ error: "Error while saving data" });
+        } else {
+            console.log("Data saved successfully");
+            res.json({ success: true });
+        }
+    });
 });
 
 // other routes and functionality here
